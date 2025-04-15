@@ -4,3 +4,6 @@ app-calculo/app-calculo.iml
 app-financeiro/app-financeiro.iml
 app-calculo/.gitignore
 app-financeiro/.gitignore
+app-logging/.idea/
+app-logging/.gitignore
+app-logging/app-logging.iml
