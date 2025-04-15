@@ -1,0 +1,6 @@
+app-calculo/.idea/
+app-financeiro/.idea/
+app-calculo/app-calculo.iml
+app-financeiro/app-financeiro.iml
+app-calculo/.gitignore
+app-financeiro/.gitignore
