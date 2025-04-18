@@ -1,37 +1,32 @@
 package br.com.empresa.app.financeiro;
 
-import br.com.empresa.app.calculo.Calculadora;
-import br.com.empresa.app.calculo.interno.OperacoesAritmeticas;
+import br.com.empresa.app.api.Calculadora;
 
 import java.lang.reflect.Field;
+import java.util.ServiceLoader;
 
 public class Teste {
 
     public static void main(String[] args) {
-        Calculadora calculadora = new Calculadora();
+        // Uma classe específica que lida com o load de diversos serviços/implementações
+        // Depende inteiramente da interface
+        Calculadora calculadora = ServiceLoader
+                .load(Calculadora.class)
+                .findFirst()
+                .get();
         System.out.println("Valor da soma: " + calculadora.soma(3, 7, 20));
 
-        OperacoesAritmeticas op = new OperacoesAritmeticas();
-        System.out.println(op.soma(30, 7.8, 3.2, 8.5));
-
-        // Acesso direto pelos metadados, abre - modifica - fecha
-        // Se eu quiser modificar, a minha classe deve estar open
-        // Seria como as transactions do JPA,
-        // Os dados só são acessíveis quando especificado pelo programador
-        Field id = null;
+        // Uso de Java Reflect
         try {
-            // Consigo acessar e modificar os dados de um atributo privado a partir de uma instancia
-            id = Calculadora.class.getDeclaredFields()[0];
+            Field id = calculadora.getClass().getDeclaredFields()[0];
             id.setAccessible(true);
-
-            id.set(calculadora, "def");
-            System.out.println(id.get(calculadora)); // Poderia ser via um get public
-
+            id.set(calculadora, "teste");
             id.setAccessible(false);
 
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
+            // Valor modificado
+            System.out.println(calculadora.getId());
+        } catch (IllegalAccessException e){
+            e.getStackTrace();
         }
-
     }
 }

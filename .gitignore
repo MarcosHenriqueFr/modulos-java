@@ -7,3 +7,7 @@ app-financeiro/.gitignore
 app-logging/.idea/
 app-logging/.gitignore
 app-logging/app-logging.iml
+app-api-publica/.idea/
+app-api-publica/.gitignore
+app-api-publica/app-api-publica.iml
+
